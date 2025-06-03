@@ -1,5 +1,5 @@
 import sqlite3
-import decorators as dec
+import src.decorators as dec
 from datetime import datetime
 
 @dec.connection("vannmagasin.db")
@@ -33,7 +33,7 @@ def insertFyllingsgrad(cursor, api_response:list):
         if cursor.rowcount > 0:
             inserted += 1
 
-    print(f"{inserted} rader ble lagt til")
+    print(f"{inserted} rader ble lagt til i fyllingsgrad")
 
 
 
@@ -70,7 +70,7 @@ def insertMaxMinFyllingsgrad(cursor, api_response:list):
         if cursor.rowcount > 0:
             inserted += 1
     
-    print(f"{inserted} rader ble lagt til")
+    print(f"{inserted} rader ble lagt til fyllingsgrad_maxmin")
     
 
 
@@ -102,7 +102,7 @@ def insertOmraader(cursor, api_response:list):
             if cursor.rowcount > 0:
                 inserted += 1
     
-    print(f"{inserted} rader ble lagt til")
+    print(f"{inserted} rader ble lagt til omraader")
 
 
 @dec.connection("vannmagasin.db")
@@ -151,5 +151,5 @@ def insertNedboer(cursor, api_response:list):
         if cursor.rowcount > 0:
             inserted += 1
     
-    print(f"{inserted} rader ble lagt til")
+    print(f"{inserted} rader ble lagt til i nedboer")
     

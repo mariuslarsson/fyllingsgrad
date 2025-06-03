@@ -1,9 +1,10 @@
 import sqlite3
-import decorators as dec
+import src.decorators as dec
 
 @dec.connection("vannmagasin.db")
 def createView(cursor):
     cursor.execute('''
+
         CREATE VIEW view_fyllingsgrad AS
                 
         SELECT f.fyllingsgrad, f.endring_fyllingsgrad, f.omrnr, f.omrType, f.iso_aar, f.iso_uke, 

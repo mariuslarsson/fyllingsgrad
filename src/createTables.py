@@ -1,5 +1,5 @@
 import sqlite3
-import decorators as dec
+import src.decorators as dec
 
 
 @dec.connection("vannmagasin.db")
