@@ -1,58 +1,76 @@
 # fyllingsgrad
 
 ```
-                        ┌───────────────────────────┐
-                        │        fyllingsgrad       │
-                        │---------------------------│
-                        │ fyllingsgrad              │
-                        │ endring_fyllingsgrad      │
-                        │ omrnr                     │
-                        │ omrType                   │
-                        │ iso_aar                   │
-                        │ iso_uke                   │
-                        └──────────┬────────────────┘
-                                   │ LEFT JOIN on omrType, omrnr, iso_uke, iso_aar
-               ┌───────────────────┴───────────────────┐
-               │                                       │
-   ┌───────────────────────┐               ┌────────────────────────┐
-   │       omraader        │               │  fyllingsgrad_maxmin   │
-   │-----------------------│               │------------------------│
-   │ omrType               │               │ omrType                │
-   │ omrnr                 │               │ omrnr                  │
-   │ navn                  │               │ iso_uke                │
-   └─────────────┬─────────┘               │ minFyllingsgrad        │
-                 │                         │ medianFyllingsGrad     │
-                 │                         │ maxFyllingsgrad        │
-                 │                         └────────────┬───────────┘
-                 │                                      │ LEFT JOIN on omrType, omrnr, iso_uke
-                 │                                      │
-                 │                                      │
-                 │                            ┌─────────┴─────────────┐
-                 │                            │      nedboer          │
-                 │                            │-----------------------│
-                 │                            │ iso_aar               │
-                 │                            │ iso_uke               │
-                 │                            │ omrnr                 │
-                 │                            │ value                 │
-                 │                            │ (filtered:            │
-                 │                            │  referenceHour = 0,   │
-                 │                            │  iso_dag = 1)         │
-                 │                            └────────────┬──────────┘
-                 │                                         │ LEFT JOIN on iso_aar, iso_uke, omrnr
-                 │                                         │
-                 └─────────────────────────────────────────┴───────────────┐
-                                                               view_fyllingsgrad
-                                               ┌──────────────────────────────┐
-                                               │ fyllingsgrad                 │
-                                               │ endring_fyllingsgrad         │
-                                               │ omrnr                        │
-                                               │ omrType                      │
-                                               │ iso_aar                      │
-                                               │ iso_uke                      │
-                                               │ navn (fra omraader)          │
-                                               │ minFyllingsgrad              │
-                                               │ medianFyllingsGrad           │
-                                               │ maxFyllingsgrad              │
-                                               │ value (nedbør)               │
-                                               └──────────────────────────────┘
++-------------------------------------------------------------------------------------------------+
+| VIEW: view_fyllingsgrad                                                                         |
+|-------------------------------------------------------------------------------------------------|
+| Valgte Kolonner:                                                                                |
+|   f.fyllingsgrad, f.endring_fyllingsgrad, f.omrnr, f.omrType, f.iso_aar, f.iso_uke,             |
+|   o.navn,                                                                                       |
+|   m.minFyllingsgrad, m.medianFyllingsGrad, m.maxFyllingsgrad,                                   |
+|   n.value                                                                                       |
++-------------------------------------------------------------------------------------------------+
+     ^
+     |
+     | Henter data fra og defineres av:
+     |
++----|--------------------------------------------------------------------------------------------+
+| TABELL: fyllingsgrad (f)                                                                        |
+|-------------------------------------------------------------------------------------------------|
+| Relevante Kolonner:                                                                             |
+|   - fyllingsgrad         (valgt)                                                                |
+|   - endring_fyllingsgrad (valgt)                                                                |
+|   - omrnr                (valgt, join-nøkkel)                                                   |
+|   - omrType              (valgt, join-nøkkel)                                                   |
+|   - iso_aar              (valgt, join-nøkkel)                                                   |
+|   - iso_uke              (valgt, join-nøkkel)                                                   |
++-------------------------------------------------------------------------------------------------+
+     |
+     |---- LEFT JOIN ----> +----------------------------------------------------------------------+
+     |                     | TABELL: omraader (o)                                                 |
+     |                     |----------------------------------------------------------------------|
+     |                     | Join på:                                                             |
+     |                     |   f.omrType = o.omrType                                              |
+     |                     |   f.omrnr = o.omrnr                                                  |
+     |                     |----------------------------------------------------------------------|
+     |                     | Relevante Kolonner:                                                  |
+     |                     |   - omrType (join-nøkkel)                                            |
+     |                     |   - omrnr   (join-nøkkel)                                            |
+     |                     |   - navn    (valgt for view)                                         |
+     |                     +----------------------------------------------------------------------+
+     |
+     |---- LEFT JOIN ----> +----------------------------------------------------------------------+
+     |                     | TABELL: fyllingsgrad_maxmin (m)                                      |
+     |                     |----------------------------------------------------------------------|
+     |                     | Join på:                                                             |
+     |                     |   f.omrType = m.omrType                                              |
+     |                     |   f.omrnr = m.omrnr                                                  |
+     |                     |   f.iso_uke = m.iso_uke                                              |
+     |                     |----------------------------------------------------------------------|
+     |                     | Relevante Kolonner:                                                  |
+     |                     |   - omrType            (join-nøkkel)                                 |
+     |                     |   - omrnr              (join-nøkkel)                                 |
+     |                     |   - iso_uke            (join-nøkkel)                                 |
+     |                     |   - minFyllingsgrad    (valgt for view)                              |
+     |                     |   - medianFyllingsGrad (valgt for view)                              |
+     |                     |   - maxFyllingsgrad    (valgt for view)                              |
+     |                     +----------------------------------------------------------------------+
+     |
+     |---- LEFT JOIN ----> +----------------------------------------------------------------------+
+                           | SUBQUERY: nedboer (n)                                                |
+                           |   (SELECT * FROM nedboer WHERE referenceHour = 0 AND iso_dag = 1)    |
+                           |----------------------------------------------------------------------|
+                           | Join på:                                                             |
+                           |   f.iso_aar = n.iso_aar                                              |
+                           |   f.iso_uke = n.iso_uke                                              |
+                           |   f.omrnr = n.omrnr                                                  |
+                           |----------------------------------------------------------------------|
+                           | Relevante Kolonner (fra subquery):                                   |
+                           |   - iso_aar (join-nøkkel)                                            |
+                           |   - iso_uke (join-nøkkel)                                            |
+                           |   - omrnr   (join-nøkkel)                                            |
+                           |   - value   (valgt for view)                                         |
+                           +----------------------------------------------------------------------+
+
+
 ```
