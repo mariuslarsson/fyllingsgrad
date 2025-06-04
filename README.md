@@ -2,7 +2,7 @@
 
 ## Requirements
 
-En fil `creds.json` i wd i formatet `{"ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"}` med User ID fra frost.met.no
+En fil `creds.json` i `working directory` i formatet `{"ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"}` med User ID fra frost.met.no
 
 ## Usage
 
