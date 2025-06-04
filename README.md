@@ -1,6 +1,6 @@
 # Fyllingsgrad og nedbør
 
-## Krav
+## Avhengigheter
 
 Installer avhengigheter med:
 
@@ -14,7 +14,7 @@ I tillegg må det opprettes en fil `creds.json` i working directory med følgend
 ```
 `ID`-verdien er User ID fra frost.met.no
 
-## Avhengigheter
+## Bruk
 
 ### 1. Opprette database og view
 
