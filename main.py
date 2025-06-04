@@ -5,8 +5,16 @@ import src.decorators as dec
 import src.createView as create_v
 
 import json
+import os
+import sys
 
 def main():
+
+    if not os.path.exists("creds.json"):
+        print("Filen creds.json ble ikke funnet i working directory. Se README.md for mer informasjon")
+        sys.exit(1)
+
+
     #TODO: Legg inn bedre logging og excepts
     with open('creds.json', 'r') as file:
         creds = json.load(file)
