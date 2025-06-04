@@ -1,22 +1,34 @@
-# fyllingsgrad
+# Fyllingsgrad og nedbør
 
 ## Requirements
 
-En fil `creds.json` i `working directory` i formatet `{"ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"}` med User ID fra frost.met.no
+Installer avhengigheter med:
+
+```bash
+pip install -r requirements.txt
+```
+I tillegg opprette en fil `creds.json` i working directory med følgende format
+
+```
+{"ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"}
+```
+`ID`-verdien er User ID fra frost.met.no
 
 ## Usage
 
-### Opprette database og view
+### 1. Opprette database og view
 
 ```
 python main.py
 ```
 
-### Generere figurer
+### 2. Generere figurer
 
 ```
 python generateFigures.py
 ```
+
+
 
 ## Datastruktur og relasjoner
 
