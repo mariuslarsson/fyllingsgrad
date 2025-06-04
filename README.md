@@ -14,7 +14,7 @@ I tillegg må det opprettes en fil `creds.json` i working directory med følgend
 ```
 `ID`-verdien er User ID fra frost.met.no
 
-## Bruk
+## Avhengigheter
 
 ### 1. Opprette database og view
 
