@@ -18,6 +18,8 @@ python main.py
 python generateFigures.py
 ```
 
+## Datastruktur og relasjoner
+
 
 ```
 +-------------------------------------------------------------------------------------------------+
