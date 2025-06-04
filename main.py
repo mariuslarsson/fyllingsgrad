@@ -6,26 +6,32 @@ import src.createView as create_v
 
 import json
 
-with open('creds.json', 'r') as file:
-    creds = json.load(file)
+def main():
+    #TODO: Legg inn bedre logging og excepts
+    with open('creds.json', 'r') as file:
+        creds = json.load(file)
 
 
-maxMinResponse = getApi.getNveApi("https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligDataMinMaxMedian")
-seriesResponse = getApi.getNveApi("https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligData")
-omraaderResponse = getApi.getNveApi("https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOmråder")
-frostRespons = getApi.getNveApi("https://frost.met.no/observations/v0.jsonld?sources=SN18700&referencetime=2022-01-01%2F2022-12-31&elements=sum(precipitation_amount%20P1D)&timeoffsets=PT6H", creds["ID"])
+    maxMinResponse = getApi.getNveApi("https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligDataMinMaxMedian")
+    seriesResponse = getApi.getNveApi("https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOffentligData")
+    omraaderResponse = getApi.getNveApi("https://biapi.nve.no/magasinstatistikk/api/Magasinstatistikk/HentOmråder")
+    frostRespons = getApi.getNveApi("https://frost.met.no/observations/v0.jsonld?sources=SN18700&referencetime=2022-01-01%2F2022-12-31&elements=sum(precipitation_amount%20P1D)&timeoffsets=PT6H", creds["ID"])
 
-create.createNedboer()
-insert.insertNedboer(frostRespons["data"])
+    create.createNedboer()
+    insert.insertNedboer(frostRespons["data"])
 
-create.createFyllingsgrad()
-insert.insertFyllingsgrad(seriesResponse)
+    create.createFyllingsgrad()
+    insert.insertFyllingsgrad(seriesResponse)
 
-create.createOmraader()
-insert.insertOmraader(omraaderResponse)
+    create.createOmraader()
+    insert.insertOmraader(omraaderResponse)
 
-create.createMaxMinFyllingsgrad()
-insert.insertMaxMinFyllingsgrad(maxMinResponse)
+    create.createMaxMinFyllingsgrad()
+    insert.insertMaxMinFyllingsgrad(maxMinResponse)
 
-create_v.createView()
-print("created view")
+    create_v.createView()
+    print("created view")
+
+
+if __name__ == "__main__":
+    main()
