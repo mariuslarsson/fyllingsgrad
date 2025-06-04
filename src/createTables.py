@@ -84,7 +84,7 @@ def createNedboer(cursor):
         iso_dag INTEGER,
         iso_aar INTEGER,
         iso_uke INTEGER,
-        value REAL,
+        nedboer_mm REAL,
         omrnr INTEGER,
         unit TEXT,
         timeOffset TEXT,

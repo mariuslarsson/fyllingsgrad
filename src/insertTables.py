@@ -134,15 +134,16 @@ def insertNedboer(cursor, api_response:list):
         #TODO: Legg til omrType=VASS her muligens.
 
         currentRow["referenceTime"] = referenceTime[0:10]
+        currentRow["nedboer_mm"] = currentRow["value"]
 
         cursor.execute('''
             INSERT OR IGNORE INTO nedboer (
                 elementId, referenceTime, referenceHour, iso_dag, iso_aar, iso_uke,
-                value, omrnr, unit, timeOffset, timeResolution, timeSeriesId,
+                nedboer_mm, omrnr, unit, timeOffset, timeResolution, timeSeriesId,
                 performanceCategory, exposureCategory, qualityCode
             ) VALUES (
                 :elementId, :referenceTime, :referenceHour, :iso_dag, :iso_aar, :iso_uke,
-                :value, :omrnr, :unit, :timeOffset, :timeResolution, :timeSeriesId,
+                :nedboer_mm, :omrnr, :unit, :timeOffset, :timeResolution, :timeSeriesId,
                 :performanceCategory, :exposureCategory, :qualityCode
             )
 
