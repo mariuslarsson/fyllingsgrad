@@ -10,8 +10,9 @@ def connection(db_name):
             result = func(cursor, *args, **kwargs)
 
             conn.commit()
+            #TODO: Fikse exception med rollback
             conn.close()
-
+            
             return(result)
         return(wrapper)
     return(decorator)
