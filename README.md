@@ -12,7 +12,7 @@ I tillegg må det opprettes en fil `creds.json` i working directory med følgend
 ```
 {"ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"}
 ```
-`ID`-verdien er User ID fra frost.met.no
+`ID`-verdien er Client ID fra frost.met.no
 
 ## Bruk
 
