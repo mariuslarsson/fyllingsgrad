@@ -11,18 +11,18 @@ def createFyllingsgrad(cursor):
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS fyllingsgrad (
-        ID TEXT PRIMARY KEY, 
-        dato_Id TEXT, -- vurdere annet enn tekst pga problemer med datavalidering
-        omrType TEXT,
-        omrnr INTEGER,
-        iso_aar INTEGER,
-        iso_uke INTEGER,
-        fyllingsgrad REAL,
-        kapasitet_TWh REAL,
-        fylling_TWh REAL,
-        neste_Publiseringsdato TEXT,
-        fyllingsgrad_forrige_uke REAL,
-        endring_fyllingsgrad REAL
+            ID TEXT PRIMARY KEY, 
+            dato_Id TEXT, -- vurdere annet enn tekst pga problemer med datavalidering
+            omrType TEXT,
+            omrnr INTEGER,
+            iso_aar INTEGER,
+            iso_uke INTEGER,
+            fyllingsgrad REAL,
+            kapasitet_TWh REAL,
+            fylling_TWh REAL,
+            neste_Publiseringsdato TEXT,
+            fyllingsgrad_forrige_uke REAL,
+            endring_fyllingsgrad REAL
 
         )
     ''')
@@ -39,16 +39,16 @@ def createMaxMinFyllingsgrad(cursor):
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS fyllingsgrad_maxmin (
-        ID TEXT PRIMARY KEY, 
-        omrType TEXT,
-        omrnr INTEGER,
-        iso_uke INTEGER,
-        minFyllingsgrad REAL,
-        minFyllingTWH REAL,
-        medianFyllingsGrad REAL,
-        medianFylling_TWH REAL,
-        maxFyllingsgrad REAL,
-        maxFyllingTWH REAL
+            ID TEXT PRIMARY KEY, 
+            omrType TEXT,
+            omrnr INTEGER,
+            iso_uke INTEGER,
+            minFyllingsgrad REAL,
+            minFyllingTWH REAL,
+            medianFyllingsGrad REAL,
+            medianFylling_TWH REAL,
+            maxFyllingsgrad REAL,
+            maxFyllingTWH REAL
 
         )
     ''')
@@ -64,11 +64,11 @@ def createOmraader(cursor):
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS omraader (
-        navn TEXT,
-        navn_langt TEXT,
-        beskrivelse TEXT,
-        omrType TEXT,
-        omrnr INTEGER
+            navn TEXT,
+            navn_langt TEXT,
+            beskrivelse TEXT,
+            omrType TEXT,
+            omrnr INTEGER
 
         )
     ''')
@@ -78,21 +78,21 @@ def createNedboer(cursor):
     
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS nedboer (
-        elementId TEXT,
-        referenceTime TEXT PRIMARY KEY,
-        referenceHour INTEGER,
-        iso_dag INTEGER,
-        iso_aar INTEGER,
-        iso_uke INTEGER,
-        nedboer_mm REAL,
-        omrnr INTEGER,
-        unit TEXT,
-        timeOffset TEXT,
-        timeResolution TEXT,
-        timeSeriesId INTEGER,
-        performanceCategory TEXT,
-        exposureCategory TEXT,
-        qualityCode INTEGER
+            elementId TEXT,
+            referenceTime TEXT PRIMARY KEY,
+            referenceHour INTEGER,
+            iso_dag INTEGER,
+            iso_aar INTEGER,
+            iso_uke INTEGER,
+            nedboer_mm REAL,
+            omrnr INTEGER,
+            unit TEXT,
+            timeOffset TEXT,
+            timeResolution TEXT,
+            timeSeriesId INTEGER,
+            performanceCategory TEXT,
+            exposureCategory TEXT,
+            qualityCode INTEGER
         
 
         )
