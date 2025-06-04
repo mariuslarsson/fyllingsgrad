@@ -7,7 +7,7 @@ Installer avhengigheter med:
 ```bash
 pip install -r requirements.txt
 ```
-I tillegg opprette en fil `creds.json` i working directory med følgende format
+I tillegg må det opprettes en fil `creds.json` i working directory med følgende format
 
 ```
 {"ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"}
