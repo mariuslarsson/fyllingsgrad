@@ -1,5 +1,24 @@
 # fyllingsgrad
 
+## Requirements
+
+En fil `creds.json` i wd i formatet `{"ID":"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"}` med User ID fra frost.met.no
+
+## Usage
+
+### Opprette database og view
+
+```
+python main.py
+```
+
+### Generere figurer
+
+```
+python generateFigures.py
+```
+
+
 ```
 +-------------------------------------------------------------------------------------------------+
 | VIEW: view_fyllingsgrad                                                                         |
