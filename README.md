@@ -28,9 +28,13 @@ python main.py
 python generateFigures.py
 ```
 
+## Datatilstander
+
+![](img/dataflyt_fyllingsgrad.png "Datatilstander")
 
 
-## Datastruktur og relasjoner
+
+## View: Datastruktur og relasjoner 
 
 
 ```
